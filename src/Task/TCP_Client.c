@@ -52,8 +52,7 @@ LOG_MODULE_DECLARE( sta, CONFIG_LOG_DEFAULT_LEVEL );
 #include <errno.h>
 #include <stdio.h>
 
-#include <sys/socket.h>
-#include <arpa/inet.h>
+//#include <arpa/inet.h>
 #include <zephyr/net/socket.h>
 #include <unistd.h> 
 
@@ -76,27 +75,7 @@ static struct k_thread tcpClientThread;
 
 //! TCP message sent by the client.
 static uint8_t TCPClientMessage[] =
-	"=============================TCP MESSAGE:============================="
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque "
-	"sodales lorem lorem, sed congue enim vehicula a. Sed finibus diam sed "
-	"odio ultrices pharetra. Nullam dictum arcu ultricies turpis congue, "
-	"vel venenatis turpis venenatis. Nam tempus arcu eros, ac congue libero "
-	"tristique congue. Proin velit lectus, euismod sit amet quam in, "
-	"maximus condimentum urna. Cras vel erat luctus, mattis orci ut, varius "
-	"urna. Nam eu lobortis velit."
-	"\n"
-	"Nullam sit amet diam vel odio sodales cursus vehicula eu arcu. Proin "
-	"fringilla, enim nec consectetur mollis, lorem orci interdum nisi, "
-	"vitae suscipit nisi mauris eu mi. Proin diam enim, mollis ac rhoncus "
-	"vitae, placerat et eros. Suspendisse convallis, ipsum nec rhoncus "
-	"aliquam, ex augue ultrices nisl, id aliquet mi diam quis ante. "
-	"Pellentesque venenatis ornare ultrices. Quisque et porttitor lectus. "
-	"Ut venenatis nunc et urna imperdiet porttitor non laoreet massa. Donec "
-	"eleifend eros in mi sagittis egestas. Sed et mi nunc. Nunc vulputate, "
-	"mauris non ullamcorper viverra, lorem nulla vulputate diam, et congue "
-	"dui velit non erat. Duis interdum leo et ipsum tempor consequat. In "
-	"faucibus enim quis purus vulputate nullam."
-	"\n";
+	"TCP Message\n";
 
 /*! TCP_Client implements the TCP Client task.
 * @brief TCP_Client uses a BSD socket estabilish a connection with a defined

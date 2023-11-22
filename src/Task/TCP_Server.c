@@ -51,8 +51,7 @@ LOG_MODULE_DECLARE(sta, CONFIG_LOG_DEFAULT_LEVEL);
 #include <errno.h>
 #include <stdio.h>
 
-#include <sys/socket.h>
-#include <arpa/inet.h>
+//#include <arpa/inet.h>
 #include <zephyr/net/socket.h>
 #include <unistd.h> 
 

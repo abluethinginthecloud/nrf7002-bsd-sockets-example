@@ -51,8 +51,7 @@ LOG_MODULE_DECLARE(sta, CONFIG_LOG_DEFAULT_LEVEL);
 #include <errno.h>
 #include <stdio.h>
 
-#include <sys/socket.h>
-#include <arpa/inet.h>
+//#include <arpa/inet.h>
 #include <zephyr/net/socket.h>
 
 #include "UDP_Server.h"
@@ -143,11 +142,10 @@ void UDP_Server(void) {
 
             // Send 
             pTransmitterBuffer = receiverBuffer;
-            do{
                 sentBytes = sendto(                                         \
                                     udpServerSocket,                        \
                                     receiverBuffer,                         \
-                                    sizeof( receiverBuffer ),               \
+                                    receivedBytes,                          \
                                     0,                                      \
                                     &clientAddress,                         \
                                     clientAddressLength );                  \
@@ -161,13 +159,9 @@ void UDP_Server(void) {
                     receivedBytes -= sentBytes;
                 }
 
-                if ( sentBytes % 1000 == 0U ) {
-                    LOG_INF( "UDP Server: Sent %u packets", sentBytes );
-                }
 
                 LOG_INF( "UDP Server mode: Received and replied with %d "   \
                         "bytes", sentBytes );
-            } while ( receivedBytes );
 
 	    } while ( true );
         if ( sentBytes < 0 ) {

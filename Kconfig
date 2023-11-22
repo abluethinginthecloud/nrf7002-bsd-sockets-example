@@ -1,46 +1,8 @@
- #! @file Kconfig
- #* @brief Kconfig configuration file
- #
- # @author A BLUE THING IN THE CLOUD S.L.U.
- #    ===  When the technology becomes art ===
- #
- # http://abluethinginthecloud.com
- # j.longares@abluethinginthecloud
- #
- # (c) A BLUE THING IN THE CLOUD S.L.U.
- #
- #
- #
- #       ██████████████    ██    ██    ██  ██████    ██████████████
- #       ██          ██      ████████████████  ██    ██          ██
- #       ██  ██████  ██  ██████  ██    ██        ██  ██  ██████  ██
- #       ██  ██████  ██    ██████    ██      ██      ██  ██████  ██
- #       ██  ██████  ██      ██      ████  ██████    ██  ██████  ██
- #       ██          ██    ██      ██████    ████    ██          ██
- #       ██████████████  ██  ██  ██  ██  ██  ██  ██  ██████████████
- #                       ██████  ████  ██████  ████
- #       ██████  ██████████  ████    ████████      ████      ██
- #       ██  ████  ██    ██  ████        ████    ████████  ██    ██
- #           ██  ██  ████  ██      ██      ██      ██  ████  ██████
- #       ████  ████    ██      ██          ████  ██  ██        ██
- #           ██████████          ██      ██    ██  ████    ██  ████
- #         ██  ████    ██      ██████    ██  ██████████    ██    ██
- #       ██  ████  ████████████████  ██    ██        ████████  ████
- #               ████        ██  ██████  ██████████      ████  ██
- #       ██████  ████████████████    ████  ██    ██████    ██  ████
- #           ████████  ██████  ██    ██████      ██        ████  ██
- #       ██    ██  ████████  ██    ██        ██    ██          ████
- #         ████  ████          ██      ████████████  ██  ████  ██
- #       ██  ██████  ████  ██    ██      ████    ██████████
- #                       ██    ██████    ██      ██      ██  ██████
- #       ██████████████  ██  ██████  ██  ████  ████  ██  ████  ████
- #       ██          ██  ██      ████████  ██    ██      ████  ████
- #       ██  ██████  ██  ████  ██    ██████      ██████████    ████
- #       ██  ██████  ██    ██████    ██  ██  ████      ████  ██████
- #       ██  ██████  ██  ████      ██    ████  ██        ████    ██
- #       ██          ██  ██    ██      ██████████████  ██      ██
- #       ██████████████  ██████  ██        ██  ████    ██████  ████
- # 
+#
+# Copyright (c) 2022 Nordic Semiconductor
+#
+# SPDX-License-Identifier: LicenseRef-Nordic-5-Clause
+#
 
 source "Kconfig.zephyr"
 
@@ -87,33 +49,7 @@ config STA_SAMPLE_PASSWORD
 
 config NRF700X_QSPI_ENCRYPTION_KEY
 	string "16 bytes QSPI encryption key, only for testing purposes"
-	depends on BOARD_NRF7002DK_NRF5340
+	depends on BOARD_NRF7002DK_NRF5340_CPUAPP
 	help
 	  Specify the QSPI encryption key
-
-config TCP_CLIENT
-	bool "Enable my function"
-	default n
-
-config TCP_SERVER
-	bool "Enable my function"
-	default n
-
-config UDP_SERVER
-	bool "Enable my function"
-	default n
-
-config UDP_CLIENT
-	bool "Enable my function"
-	default n
-
-config LED
-	bool "Enable my function"
-	default n
-
-config WIFI_STATIONING
-	bool "Enable my function"
-	default n
-
 endmenu
-

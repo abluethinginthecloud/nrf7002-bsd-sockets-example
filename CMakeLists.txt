@@ -1,46 +1,8 @@
- #! @file CMakeLists.txt
- #* @brief CMake configuration file
- #
- # @author A BLUE THING IN THE CLOUD S.L.U.
- #    ===  When the technology becomes art ===
- #
- # http://abluethinginthecloud.com
- # j.longares@abluethinginthecloud
- #
- # (c) A BLUE THING IN THE CLOUD S.L.U.
- #
- #
- #
- #       ██████████████    ██    ██    ██  ██████    ██████████████
- #       ██          ██      ████████████████  ██    ██          ██
- #       ██  ██████  ██  ██████  ██    ██        ██  ██  ██████  ██
- #       ██  ██████  ██    ██████    ██      ██      ██  ██████  ██
- #       ██  ██████  ██      ██      ████  ██████    ██  ██████  ██
- #       ██          ██    ██      ██████    ████    ██          ██
- #       ██████████████  ██  ██  ██  ██  ██  ██  ██  ██████████████
- #                       ██████  ████  ██████  ████
- #       ██████  ██████████  ████    ████████      ████      ██
- #       ██  ████  ██    ██  ████        ████    ████████  ██    ██
- #           ██  ██  ████  ██      ██      ██      ██  ████  ██████
- #       ████  ████    ██      ██          ████  ██  ██        ██
- #           ██████████          ██      ██    ██  ████    ██  ████
- #         ██  ████    ██      ██████    ██  ██████████    ██    ██
- #       ██  ████  ████████████████  ██    ██        ████████  ████
- #               ████        ██  ██████  ██████████      ████  ██
- #       ██████  ████████████████    ████  ██    ██████    ██  ████
- #           ████████  ██████  ██    ██████      ██        ████  ██
- #       ██    ██  ████████  ██    ██        ██    ██          ████
- #         ████  ████          ██      ████████████  ██  ████  ██
- #       ██  ██████  ████  ██    ██      ████    ██████████
- #                       ██    ██████    ██      ██      ██  ██████
- #       ██████████████  ██  ██████  ██  ████  ████  ██  ████  ████
- #       ██          ██  ██      ████████  ██    ██      ████  ████
- #       ██  ██████  ██  ████  ██    ██████      ██████████    ████
- #       ██  ██████  ██    ██████    ██  ██  ████      ████  ██████
- #       ██  ██████  ██  ████      ██    ████  ██        ████    ██
- #       ██          ██  ██    ██      ██████████████  ██      ██
- #       ██████████████  ██████  ██        ██  ████    ██████  ████
- # 
+#
+# Copyright (c) 2022 Nordic Semiconductor ASA
+#
+# SPDX-License-Identifier: LicenseRef-Nordic-5-Clause
+#
 
 cmake_minimum_required(VERSION 3.20.0)
 
@@ -51,10 +13,11 @@ target_include_directories(app PUBLIC ${ZEPHYR_BASE}/subsys/net/ip)
 
 target_sources(app PRIVATE
 	src/main.c
+	src/Task/Led.c
+	src/Task/TCP_Client.c
+	src/Task/TCP_Server.c
+	src/Task/UDP_Client.c
+	src/Task/UDP_Server.c
+	src/Task/Wifi_Stationing.c
+
 )
-target_sources_ifdef(CONFIG_TCP_SERVER app PRIVATE src/Task/TCP_Server.c) 
-target_sources_ifdef(CONFIG_TCP_CLIENT app PRIVATE src/Task/TCP_Client.c) 
-target_sources_ifdef(CONFIG_UDP_SERVER app PRIVATE src/Task/UDP_Server.c) 
-target_sources_ifdef(CONFIG_UDP_CLIENT app PRIVATE src/Task/UDP_Client.c) 
-target_sources_ifdef(CONFIG_LED app PRIVATE src/Task/Led.c) 
-target_sources_ifdef(CONFIG_WIFI app PRIVATE src/Task/Wifi_Stationing.c) 

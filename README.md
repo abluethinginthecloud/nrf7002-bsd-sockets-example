@@ -1,4 +1,4 @@
-# nRF7002dk TCP/UDP Sockets example
+﻿# nRF7002dk TCP/UDP Sockets example
 
 The nRF7002dk TCP/UDP Sockets example implements four different kinds of TCP/UDP connections running in parallel, with a previous WiFi Stationing task.
 

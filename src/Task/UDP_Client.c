@@ -51,9 +51,9 @@ LOG_MODULE_DECLARE(sta, LOG_LEVEL_DBG);
 #include <errno.h>
 #include <stdio.h>
 
-#include <sys/socket.h>
-#include <arpa/inet.h>
+//#include <arpa/inet.h>
 #include <zephyr/net/socket.h>
+#include <zephyr/sys/fdtable.h>
 #include <unistd.h> 
 
 #include "UDP_Client.h"
@@ -71,30 +71,11 @@ LOG_MODULE_DECLARE(sta, LOG_LEVEL_DBG);
 K_THREAD_STACK_DEFINE(UDP_CLIENT_STACK, UDP_CLIENT_STACK_SIZE);
 //! Variable to identify the UDP Client thread
 static struct k_thread udpClientThread;
+static int udpClientSocket;
 
 //! UDP message sent by the client.
 static const uint8_t udpClientMessage[] =
-    "=============================UDP MESSAGE:============================="
-	"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque "
-	"sodales lorem lorem, sed congue enim vehicula a. Sed finibus diam sed "
-	"odio ultrices pharetra. Nullam dictum arcu ultricies turpis congue, "
-	"vel venenatis turpis venenatis. Nam tempus arcu eros, ac congue libero "
-	"tristique congue. Proin velit lectus, euismod sit amet quam in, "
-	"maximus condimentum urna. Cras vel erat luctus, mattis orci ut, varius "
-	"urna. Nam eu lobortis velit."
-	"\n"
-	"Nullam sit amet diam vel odio sodales cursus vehicula eu arcu. Proin "
-	"fringilla, enim nec consectetur mollis, lorem orci interdum nisi, "
-	"vitae suscipit nisi mauris eu mi. Proin diam enim, mollis ac rhoncus "
-	"vitae, placerat et eros. Suspendisse convallis, ipsum nec rhoncus "
-	"aliquam, ex augue ultrices nisl, id aliquet mi diam quis ante. "
-	"Pellentesque venenatis ornare ultrices. Quisque et porttitor lectus. "
-	"Ut venenatis nunc et urna imperdiet porttitor non laoreet massa. Donec "
-	"eleifend eros in mi sagittis egestas. Sed et mi nunc. Nunc vulputate, "
-	"mauris non ullamcorper viverra, lorem nulla vulputate diam, et congue "
-	"dui velit non erat. Duis interdum leo et ipsum tempor consequat. In "
-	"faucibus enim quis purus vulputate nullam."
-	"\n";
+    "UDP Message\n";
 
 
 /*! UDP_Client implements the UDP Client task.
@@ -105,10 +86,10 @@ static const uint8_t udpClientMessage[] =
 * 		This function is used on an independent thread.
 */
 void UDP_Client() {
-    int udpClientSocket;
 	struct sockaddr_in serverAddress;
 	int connectionResult;
 	int sentBytes = 0;
+	int errorCode = 0;
 	
 	// Starve the thread until a DHCP IP is assigned to the board 
     while( !context.connected ){
@@ -118,12 +99,13 @@ void UDP_Client() {
 	// Server IPV4 address configuration 
     serverAddress.sin_family = AF_INET;
     serverAddress.sin_port = htons( UDP_CLIENT_PORT );
-    inet_pton( 																\
+    errorCode = inet_pton( 																\
 			AF_INET, 														\
 			CONFIG_NET_CONFIG_PEER_IPV4_ADDR, 								\
 			&serverAddress.sin_addr );
 
 	// Client socket creation 
+	//z_free_fd(1);
 	udpClientSocket = socket( 												\
 							serverAddress.sin_family, 						\
 							SOCK_DGRAM, 									\
